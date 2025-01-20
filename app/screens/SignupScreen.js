@@ -1,29 +1,23 @@
-// app/screens/LoginScreen.js
+// app/screens/SignupScreen.js
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-export default function LoginScreen({ navigation }) {
+export default function SignupScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleLogin = () => {
-    // For now, any password is valid
-    navigation.replace('MainTabs', { userEmail: email });
-  };
-
-  const handleGoToSignup = () => {
-    navigation.navigate('Signup');
+  
+  // For now, do nothing fancy with these details
+  const handleSignup = () => {
+    // Mock sign up success
+    // Could store in some global state, or just navigate back for now
+    alert('Signed up (dummy). Please log in with your new credentials!');
+    navigation.goBack(); 
   };
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../assets/small.jpg')}
-        style={{ width: 80, height: 80, marginBottom: 20 }}
-        resizeMode="contain"
-      />
-      <Text style={styles.title}>KENNERKALL</Text>
-
+      <Text style={styles.title}>Create an Account</Text>
+      
       <TextInput
         style={styles.input}
         placeholder="Enter Email"
@@ -31,6 +25,7 @@ export default function LoginScreen({ navigation }) {
         onChangeText={setEmail}
         keyboardType="email-address"
       />
+      
       <TextInput
         style={styles.input}
         placeholder="Enter Password"
@@ -38,15 +33,8 @@ export default function LoginScreen({ navigation }) {
         onChangeText={setPassword}
         secureTextEntry
       />
-
-      <Button title="Login" onPress={handleLogin} color="#1D4ED8" />
-
-      {/* "Sign Up" Link/CTA */}
-      <TouchableOpacity onPress={handleGoToSignup} style={{ marginTop: 16 }}>
-        <Text style={{ color: '#1D4ED8', fontWeight: '600' }}>
-          Don’t have an account? Sign Up
-        </Text>
-      </TouchableOpacity>
+      
+      <Button title="Sign Up" onPress={handleSignup} color="#1D4ED8" />
     </View>
   );
 }

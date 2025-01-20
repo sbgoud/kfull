@@ -1,6 +1,13 @@
 // app/components/ProfileCard.js
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { 
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default function ProfileCard({
@@ -10,6 +17,14 @@ export default function ProfileCard({
   audioPrice,
   videoPrice,
 }) {
+  const navigation = useNavigation();
+
+  const handleCall = () => {
+    navigation.navigate('CallSession', {
+      professionalName: name,
+    });
+  };
+
   return (
     <View style={styles.card}>
       <Image source={{ uri: avatar }} style={styles.avatar} />
@@ -17,11 +32,12 @@ export default function ProfileCard({
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.profession}>{profession}</Text>
         <View style={styles.callRow}>
-          <TouchableOpacity style={styles.callButton}>
+          <TouchableOpacity style={styles.callButton} onPress={handleCall}>
             <Ionicons name="call-outline" size={20} color="#1D4ED8" />
             <Text style={styles.callPrice}>{audioPrice}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.callButton}>
+
+          <TouchableOpacity style={styles.callButton} onPress={handleCall}>
             <Ionicons name="videocam-outline" size={20} color="#1D4ED8" />
             <Text style={styles.callPrice}>{videoPrice}</Text>
           </TouchableOpacity>
